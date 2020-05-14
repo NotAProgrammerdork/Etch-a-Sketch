@@ -1,4 +1,5 @@
 let gridContainer = document.querySelector('#gridContainer');
+let clearBtn = document.querySelector('#clear');
 
 for(let i = 1; i <= 256; i++) {
     let gridElement = document.createElement('div');
@@ -7,17 +8,15 @@ for(let i = 1; i <= 256; i++) {
     gridContainer.appendChild(gridElement);
 }
 
-/*
-div.gridElement:hover {
-    background-color: black;
-}
-*/
-
 let gridElements = Array.from(document.querySelectorAll('.gridElement'));
-
 gridElements.forEach((element) => {
     element.addEventListener('mousedown', () => {
         element.classList.toggle('black');
     });
 });
 
+clearBtn.addEventListener('click', () => {
+    gridElements.forEach((element) => {
+        element.classList.remove('black');
+    })
+})
