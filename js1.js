@@ -21,15 +21,21 @@ function canvas() {
     clear();
     let newVal = prompt();
     gridContainer.style.gridTemplate = `repeat(${newVal}, 1fr) / repeat(${newVal}, 1fr)`;
-    for(i = 1; i <= Math.pow(val, 2); i++) {
-        gridContainer.removeChild(gridContainer.lastChild);
-    }
-    for(i = 1; i <= Math.pow(newVal, 2); i++) {
-        let gridElement = document.createElement('div');
-        gridElement.style.gridArea = 'auto';
-        gridElement.classList.add('gridElement');
-        gridContainer.appendChild(gridElement);
+    if(val > newVal) {
+        let valMax = Math.pow(val, 2) - Math.pow(newVal, 2);
+        for(i = 1; i <= valMax; i++) {
+            gridContainer.removeChild(gridContainer.lastChild);
         }
+    }
+    if(val < newVal) {
+        let valMin = Math.pow(newVal, 2) - Math.pow(val, 2);
+        for(i = 1; i <= valMin; i++) {
+            let gridElement = document.createElement('div');
+            gridElement.style.gridArea = 'auto';
+            gridElement.classList.add('gridElement');
+            gridContainer.appendChild(gridElement);
+        }
+    }
     val = newVal;
     grid = Array.from(document.querySelectorAll('.gridElement'));
     coloring();
