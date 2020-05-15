@@ -9,10 +9,11 @@ div#allContent {
 
 div#gridContainer {
     display: grid;
-    grid-template: repeat(16, 40px) / repeat(16, 40px);
     border: 5px solid salmon;
     background-color: #fff;
     float: left;
+    height: 320px;
+    width: 320px;
 }
 
 div#buttons {
