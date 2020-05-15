@@ -2,10 +2,11 @@
 let gridContainer = document.querySelector('#gridContainer');
 let clearBtn = document.querySelector('#clear');
 let newCanvas = document.querySelector('#canvas');
+let border = document.querySelector('#lgt');
 let val = 16;
-let i = 1;
+let i;
 gridContainer.style.gridTemplate = `repeat(${val}, 1fr) / repeat(${val}, 1fr)`
-for(i; i <= Math.pow(val, 2); i++) {
+for(i = 1; i <= Math.pow(val, 2); i++) {
     let gridElement = document.createElement('div');
     gridElement.style.gridArea = 'auto';
     gridElement.classList.add('gridElement');
@@ -17,12 +18,13 @@ let grid = Array.from(document.querySelectorAll('.gridElement'));
 
 // Functions
 function canvas() {
+    clear();
     let newVal = prompt();
     gridContainer.style.gridTemplate = `repeat(${newVal}, 1fr) / repeat(${newVal}, 1fr)`;
-    for(i; i <= Math.pow(val, 2); i++) {
+    for(i = 1; i <= Math.pow(val, 2); i++) {
         gridContainer.removeChild(gridContainer.lastChild);
     }
-    for(i; i <= Math.pow(newVal, 2); i++) {
+    for(i = 1; i <= Math.pow(newVal, 2); i++) {
         let gridElement = document.createElement('div');
         gridElement.style.gridArea = 'auto';
         gridElement.classList.add('gridElement');
@@ -44,10 +46,15 @@ function coloring() {
         });
     });
 }
-
+function lightgray() {
+    grid.forEach((element) => {
+        element.classList.toggle('lightgrayborder')
+    })
+}
 
 
 // Listeners
 clearBtn.addEventListener('click', clear);
 newCanvas.addEventListener('click', canvas);
+border.addEventListener('click', lightgray);
 coloring()
