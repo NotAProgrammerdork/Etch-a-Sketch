@@ -3,10 +3,13 @@ let gridContainer = document.querySelector('#gridContainer');
 let clearBtn = document.querySelector('#clear');
 let newCanvas = document.querySelector('#canvas');
 let border = document.querySelector('#lgt');
-let val = 16;
+let input = document.querySelector('input');
+let value = 16;
+let lghttimer = 0;
+let penNumber = 0;
 let i;
-gridContainer.style.gridTemplate = `repeat(${val}, 1fr) / repeat(${val}, 1fr)`
-for(i = 1; i <= Math.pow(val, 2); i++) {
+gridContainer.style.gridTemplate = `repeat(${value}, 1fr) / repeat(${value}, 1fr)`
+for(i = 1; i <= Math.pow(value, 2); i++) {
     let gridElement = document.createElement('div');
     gridElement.style.gridArea = 'auto';
     gridElement.classList.add('gridElement');
@@ -19,25 +22,29 @@ let grid = Array.from(document.querySelectorAll('.gridElement'));
 // Functions
 function canvas() {
     clear();
-    let newVal = prompt();
-    gridContainer.style.gridTemplate = `repeat(${newVal}, 1fr) / repeat(${newVal}, 1fr)`;
-    if(val > newVal) {
-        let valMax = Math.pow(val, 2) - Math.pow(newVal, 2);
+    let newVal = Number(prompt());
+    // Me costó esta parte, si el usuario va a usar números DECLARA que son números
+    if(value > newVal) {
+        let valMax = Math.pow(value, 2) - Math.pow(newVal, 2);
         for(i = 1; i <= valMax; i++) {
             gridContainer.removeChild(gridContainer.lastChild);
         }
     }
-    if(val < newVal) {
-        let valMin = Math.pow(newVal, 2) - Math.pow(val, 2);
+    if(value < newVal) {
+        let valMin = Math.pow(newVal, 2) - Math.pow(value, 2);
         for(i = 1; i <= valMin; i++) {
             let gridElement = document.createElement('div');
             gridElement.style.gridArea = 'auto';
             gridElement.classList.add('gridElement');
+            if(lghttimer === 1) {
+                gridElement.classList.add('lightgrayborder');
+            }
             gridContainer.appendChild(gridElement);
         }
     }
-    val = newVal;
+    gridContainer.style.gridTemplate = `repeat(${newVal}, 1fr) / repeat(${newVal}, 1fr)`;
     grid = Array.from(document.querySelectorAll('.gridElement'));
+    value = newVal;
     coloring();
 }
 function clear() {
@@ -53,10 +60,20 @@ function coloring() {
     });
 }
 function lightgray() {
-    grid.forEach((element) => {
-        element.classList.toggle('lightgrayborder')
-    })
+    if(lghttimer === 1) {
+        grid.forEach((element) => {
+            element.classList.remove('lightgrayborder');
+            lghttimer = 0;
+        })
+        return;
+    } else if (lghttimer === 0) {
+        grid.forEach((element) => {
+            element.classList.add('lightgrayborder');
+        })
+    }
+    lghttimer = 1;
 }
+
 
 
 // Listeners

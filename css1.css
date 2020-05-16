@@ -2,6 +2,15 @@ body {
     background-color: #000;
 }
 
+h1 {
+    text-align: center;
+    font-weight: stronger;
+    color: lightgray;
+    font-family: monospace;
+    font-size: 55px;
+    margin-top: 50px;
+}
+
 div#allContent {
     display: flex;
     justify-content: center;
@@ -9,7 +18,7 @@ div#allContent {
 
 div#gridContainer {
     display: grid;
-    border: 5px solid salmon;
+    border: 5px solid lightgray;
     background-color: #fff;
     float: left;
     height: 320px;
@@ -17,12 +26,12 @@ div#gridContainer {
 }
 
 div#buttons {
-    margin-left: 15px;
+    margin-left: 16px;
     display: inherit;
     flex-direction: column;
 }
 
-button {
+button, input {
     width: 50px;
     height: 50px;
     outline: none;
@@ -31,16 +40,25 @@ button {
 
 button#clear {
     background-color: aqua;
+    margin-top: 0;
 }
 
 button#canvas {
     background-color: crimson;
 }
 
-.black {
-    background-color: #000;
-}
-
 div.lightgrayborder {
     border: 1px solid lightgray;
+}
+
+button#lgt {
+    background-color: silver;
+}
+
+input#penColor {
+    border: none;
+}
+
+.black {
+    background-color: #000;
 }
