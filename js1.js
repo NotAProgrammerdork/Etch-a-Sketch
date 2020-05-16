@@ -49,13 +49,17 @@ function canvas() {
 }
 function clear() {
     grid.forEach((element) => {
-        element.classList.remove('black');
+        element.style.backgroundColor = '#fff';
     })
 }
 function coloring() { 
     grid.forEach((element) => {
-        element.addEventListener('mousemove', () => {
-            element.classList.add('black');
+        element.addEventListener('mouseenter', () => {
+            let rScheme = Math.floor(Math.random() * 255) + 1;
+            let gScheme = Math.floor(Math.random() * 255) + 1;
+            let bScheme = Math.floor(Math.random() * 255) + 1;
+            let aScheme = Math.random();
+            element.style.backgroundColor =  `rgb(${rScheme}, ${gScheme}, ${bScheme}, ${aScheme})`;
         });
     });
 }
